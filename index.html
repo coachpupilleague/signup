@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+      .form-group mb-4.required > label:after { 
+         content:"*";
+      }
+    </style>
+
+    <title>CPL signup</title>
+  </head>
+  <body>
+
+
+<div class="container mt-md-5 mb-md-5">
+  <div class="row">
+    <div class="col-md-3 text-center">
+      <img src="cpllogo.png" class="img-fluid" alt="Coach Pupil League Logo">
+    </div>
+    <div class="col-md-9">
+
+      <form>
+
+        <!-- Account name -->
+        <div class="form-group mb-4 required">
+          <label for="account">Account name</label>
+          <input class="form-control" type="text" placeholder="e.g. lazersnipe" id="account" aria-describedby="account-help">
+          <small id="account-help" class="form-text text-muted">The StarCraft account name you will be using during CPL.</small>
+        </div>
+
+        <!-- Discord account -->
+        <div class="form-group mb-4 required">
+          <label for="discord">Discord account</label>
+          <input class="form-control" type="text" placeholder="e.g. ~Medi~#1708" id="discord" aria-describedby="discord-help">
+          <small id="discord-help" class="form-text text-muted">Discord account you will be joining the discord with. Please use a discord name that is the same or similar to your StarCraft account name to make things easier for everyone.</small>
+        </div>
+
+        <!-- Role(s) -->
+        <div class="form-group mb-4 required">
+          <label>Role(s)</label>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="player" id="player">
+            <label class="form-check-label" for="player">
+              Player
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="coach" id="coach">
+            <label class="form-check-label" for="coach">
+              Coach
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="assistant_coach" id="assistant_coach">
+            <label class="form-check-label" for="assistant_coach">
+              Assistant Coach
+            </label>
+          </div>
+          <small class="form-text text-muted">Coach/Assistant Coach/Player (You can sign-up for BOTH an Assistant Coach and Player if you meet the requirements, but you'll need to qualify for Tier 0 to be an Assistant Coach).</small>
+        </div>
+
+        <!-- MMR -->
+        <div class="form-group mb-4 required">
+          <label for="mmr">MMR</label>
+          <input class="form-control" type="text" placeholder="e.g. 1750" id="mmr" aria-describedby="mmr-help">
+          <small id="mmr-help" class="form-text text-muted">Approximate MMR (if you haven't laddered on StarCraft Remastered you can use an old ICCUP rank, or best guess).</small>
+        </div>
+
+        <!-- Race -->
+        <div class="form-group mb-4 required">
+          <label for="race">Race</label>
+          <select class="form-control" id="race" aria-describedby="race-help">
+            <option>Terran</option>
+            <option>Protoss</option>
+            <option>Zerg</option>
+            <option>Racepicker</option>
+          </select>
+          <small id="race-help" class="form-text text-muted">Main Race/Match-ups if race picker (Random is not allowed, but you can play a different race week-to-week if you wish).</small>
+        </div>
+
+        <!-- Timezone -->
+        <div class="form-group mb-4 required">
+          <label for="timezone">Timezone</label>
+          <input class="form-control" type="text" placeholder="e.g. GMT -7 (MST)" id="timezone" aria-describedby="timezone-help">
+          <small id="timezone-help" class="form-text text-muted">What is your timezone (This will greatly help us when creating teams to try our best to help get players in similar timezone to play with).</small>
+        </div>
+
+        <!-- Team Admin -->
+        <div class="form-group mb-4">
+          <label for="team-admin">Team Admin</label>
+          <textarea class="form-control" rows="3" placeholder="e.g. I can help with handling the Administrating of the league!" id="team-admin" aria-describedby="team-admin-help"></textarea>
+          <small id="team-admin-help" class="form-text text-muted">If you'd like to be a Team Admin for your team (help handling team line-ups, reporting your teams scores) , or if you have any interest in volunteering for any other Admin work/casting etc. let us know.</small>
+        </div>
+
+        <!-- Additional info -->
+        <div class="form-group mb-4">
+          <label for="additional-info">Additional info</label>
+          <textarea class="form-control" rows="3" placeholder="e.g. It doesn't matter what team I'm on, I want to help people improve!" id="additional-info" aria-describedby="additional-info-help"></textarea>
+          <small id="additional-info-help" class="form-text text-muted">Any additional additional-information we should know, such as having a couple players or a certain team you'd like to play with.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
