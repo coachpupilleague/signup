@@ -247,6 +247,8 @@
       </div>
     </div>
 
+    <script type="text/javascript" src="helper_functions.js"></script>
+
     <!-- https://github.com/rickharrison/validate.js -->
     <script type="text/javascript" src="validate.min.js"></script>
 
@@ -267,11 +269,6 @@
           el.classList.remove("is-invalid");
           el.removeEventListener('focus', removeIsInvalidFromAllNearInputs);
         }
-      }
-
-      var callback_validateDiscord = function(value) {
-        // validating discord names with regex
-        return /^[^#@\:]*#\d{4}$/.test(value);
       }
 
       var validator = new FormValidator('cpl-signup', [{
@@ -309,6 +306,13 @@
           
           submitButton.style.display = 'none';
           loadingSpinner.style.display = 'block';
+
+          var formData = new FormData(form);
+          for (entry of formData.entries()) {
+            var key = entry[0];
+            var value = entry[1];
+            formData.set(key, sanitize(value));
+          }
 
           fetch(form.action, { method: 'POST', body: new FormData(form) })
             .then(response => response.json())
