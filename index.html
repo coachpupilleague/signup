@@ -10,15 +10,28 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="loadingspinner.css">
+
     <style>
       .invalid-tooltip-container {
         position: relative;
       }
-      .invalid-tooltip-container.is-invalid .invalid-tooltip {
-        display: block;
+      .invalid-tooltip {
+        left: 0;
       }
       .form-group .required > label:after { 
         content:"*";
+      }
+      #successful-submit {
+        display: none;
+        margin-top: 50px;
+        font-size: 30px;
+      }
+      #loading-spinner {
+        display: none;
+      }
+      .checkmark {
+        color: green;
       }
     </style>
 
@@ -33,7 +46,7 @@
         </div>
         <div class="col-md-9">
 
-          <form name="cpl-signup">
+          <form name="cpl-signup" action="https://script.google.com/macros/s/AKfycby6OMbOfo4Su-LTRLpkD9XuIrKSCWWij_JWwowsvXFVGCJc5155HFU5mNgaewbB6GXk/exec" method="POST">
 
             <!-- Account name -->
             <div class="form-group mb-4 required">
@@ -70,24 +83,25 @@
               <label>Role(s)</label>
               <div class="invalid-tooltip-container">
                 <div class="form-check">
-                  <input class="form-check-input custom-control-input" type="checkbox" value="player" id="player" name="roles[]">
-                  <label class="form-check-label custom-control-label" for="player">
+                  <input class="form-check-input" type="checkbox" value="player" id="player" name="roles[]">
+                  <label class="form-check-label" for="player">
                     Player
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input custom-control-input" type="checkbox" value="coach" id="coach" name="roles[]">
-                  <label class="form-check-label custom-control-label" for="coach">
+                  <input class="form-check-input" type="checkbox" value="coach" id="coach" name="roles[]">
+                  <label class="form-check-label" for="coach">
                     Coach
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input custom-control-input" type="checkbox" value="assistant_coach" id="assistant_coach" name="roles[]">
-                  <label class="form-check-label custom-control-label" for="assistant_coach">
+                  <input class="form-check-input" type="checkbox" value="assistant_coach" id="assistant_coach" name="roles[]">
+                  <label class="form-check-label" for="assistant_coach">
                     Assistant Coach
                   </label>
+                  <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                  <div class="invalid-tooltip">Please check at least one</div>
                 </div>
-                <div class="invalid-tooltip">Please check at least one</div>
               </div>
               <small class="form-text text-muted">Coach/Assistant Coach/Player (You can sign-up for BOTH an Assistant Coach and Player if you meet the requirements, but you'll need to qualify for Tier 0 to be an Assistant Coach).</small>
             </div>
@@ -216,24 +230,56 @@
               <small id="additional-info-help" class="form-text text-muted">Any additional additional-information we should know, such as having a couple players or a certain team you'd like to play with.</small>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+
+            <div id="loading-spinner">
+              <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+
           </form>
+
+          <div id="successful-submit">
+            <span class="checkmark">&check;</span>
+            Form submitted successfully.
+          </div>
 
         </div>
       </div>
     </div>
 
+    <!-- https://github.com/rickharrison/validate.js -->
     <script type="text/javascript" src="validate.min.js"></script>
+
     <script>
-      const scriptURL = 'https://script.google.com/macros/s/AKfycby6OMbOfo4Su-LTRLpkD9XuIrKSCWWij_JWwowsvXFVGCJc5155HFU5mNgaewbB6GXk/exec';
       const form = document.forms['cpl-signup'];
+      const successfulSubmit = document.getElementById('successful-submit');
+      const loadingSpinner = document.getElementById('loading-spinner');
+      const submitButton = document.getElementById('submit-button');
+
+      var removeIsInvalidFromThis = function() {
+        this.classList.remove("is-invalid");
+        this.removeEventListener('focus', removeIsInvalidFromThis);
+      }
+      
+      var removeIsInvalidFromAllNearInputs = function() {
+        var allNearInputs = this.closest('.form-group').querySelectorAll('input');
+        for (el of allNearInputs) {
+          el.classList.remove("is-invalid");
+          el.removeEventListener('focus', removeIsInvalidFromAllNearInputs);
+        }
+      }
+
+      var callback_validateDiscord = function(value) {
+        // validating discord names with regex
+        return /^[^#@\:]*#\d{4}$/.test(value);
+      }
 
       var validator = new FormValidator('cpl-signup', [{
         name: 'account',
         rules: 'required'
       }, {
         name: 'discord',
-        rules: 'required'
+        rules: 'required|callback_validateDiscord'
       }, {
         name: 'cpl_discord',
         rules: 'required'
@@ -243,25 +289,33 @@
       }, {
         name: 'mmr',
         rules: 'required'
-      }], function(errors) {
+      }], function(errors, event) {
+        event.preventDefault();
+
         if (errors.length > 0) {
           for (error of errors) {
             var element = error.element;
             if (Symbol.iterator in Object(element)) {
               for (el of element) {
                 el.classList.add("is-invalid");
+                el.addEventListener('focus', removeIsInvalidFromAllNearInputs);
               }
             } else {
               element.classList.add("is-invalid");
+              element.addEventListener('focus', removeIsInvalidFromThis);
             }
           }
         } else {
-          // fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-          //   .then(response => response.json())
-          //   .then(response => console.log('Success!', response))
-          //   .catch(error => console.error('Error!', error.message))
+          
+          submitButton.style.display = 'none';
+          loadingSpinner.style.display = 'block';
+
+          fetch(form.action, { method: 'POST', body: new FormData(form) })
+            .then(response => response.json())
+            .then(response => { form.style.display = 'none'; successfulSubmit.style.display = 'block'; })
+            .catch(error => console.error('Error!', error.message))
         }
-      });
+      }).registerCallback('validateDiscord', callback_validateDiscord);
 
     </script>
 
