@@ -52,7 +52,7 @@
       <h1>CPL7 Signup form</h1>
     </div>
 
-    <div class="container mt-md-2 mb-md-5">
+    <div class="container mt-2 mb-5">
 
       <div class="row">
         <div class="col-md-3 text-center">
@@ -60,9 +60,9 @@
         </div>
         <div class="col-md-9">
 
-          <div class="mb-3">Fields marked <span class="red">*</span> are required.</div>
-
           <form name="cpl-signup" action="https://script.google.com/macros/s/AKfycby6OMbOfo4Su-LTRLpkD9XuIrKSCWWij_JWwowsvXFVGCJc5155HFU5mNgaewbB6GXk/exec" method="POST">
+
+            <div class="mb-3">Fields marked <span class="red">*</span> are required.</div>
 
             <!-- Account name -->
             <div class="form-group mb-4 required">
@@ -127,7 +127,7 @@
               <label for="mmr">MMR</label>
               <div class="invalid-tooltip-container">
                 <input class="form-control" type="text" placeholder="e.g. 1750" id="mmr" aria-describedby="mmr-help" name="mmr">
-                <div class="invalid-tooltip">Please provide MMR</div>
+                <div class="invalid-tooltip">Please provide MMR (only a number with 3 or 4 digits)</div>
               </div>
               <small id="mmr-help" class="form-text text-muted">Approximate MMR (if you haven't laddered on StarCraft Remastered you can use an old ICCUP rank, or best guess).</small>
             </div>
@@ -135,13 +135,47 @@
             <!-- Race -->
             <div class="form-group mb-4 required">
               <label for="race">Race</label>
-              <select class="form-control" id="race" aria-describedby="race-help" name="race">
-                <option>Terran</option>
-                <option>Protoss</option>
-                <option>Zerg</option>
-                <option>Racepicker</option>
+              <select class="form-control" id="race" aria-describedby="race-help" name="race[]">
+                <option value="Terran">Terran</option>
+                <option value="Protoss">Protoss</option>
+                <option value="Zerg">Zerg</option>
+                <option value="Racepicker">Racepicker</option>
               </select>
               <small id="race-help" class="form-text text-muted">Main Race/Match-ups if race picker (Random is not allowed, but you can play a different race week-to-week if you wish).</small>
+            </div>
+
+            <!-- Racepicker matchups -->
+            <div class="row d-none" id="js-racepicker-matchup-container">
+              <div class="col-md-4">
+                <div class="form-group mb-4 required">
+                  <label for="vs-terran">vs. Terran</label>
+                  <select class="form-control js-racepicker-matchup-select" id="vs-terran">
+                    <option value="TvT">Terran (TvT)</option>
+                    <option value="PvT">Protoss (PvT)</option>
+                    <option value="ZvT">Zerg (ZvT)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mb-4 required">
+                  <label for="vs-protoss">vs. Protoss</label>
+                  <select class="form-control js-racepicker-matchup-select" id="vs-protoss">
+                    <option value="TvP">Terran (TvP)</option>
+                    <option value="PvP">Protoss (PvP)</option>
+                    <option value="ZvP">Zerg (ZvP)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group mb-4 required">
+                  <label for="vs-zerg">vs. Zerg</label>
+                  <select class="form-control js-racepicker-matchup-select" id="vs-zerg">
+                    <option value="TvZ">Terran (TvZ)</option>
+                    <option value="PvZ">Protoss (PvZ)</option>
+                    <option value="ZvZ">Zerg (ZvZ)</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
             <!-- Timezone -->
@@ -273,6 +307,8 @@
       const successfulSubmit = document.getElementById('successful-submit');
       const loadingSpinner = document.getElementById('loading-spinner');
       const submitButton = document.getElementById('submit-button');
+      const racepickerMatchupContainer = document.getElementById('js-racepicker-matchup-container');
+      const racepickerMatchupSelects = Array.from(document.getElementsByClassName('js-racepicker-matchup-select'));
 
       var removeIsInvalidFromThis = function() {
         this.classList.remove("is-invalid");
@@ -286,6 +322,16 @@
           el.removeEventListener('focus', removeIsInvalidFromAllNearInputs);
         }
       }
+
+      form.race.addEventListener('change', (event) => {
+        if (event.target.value === 'Racepicker') {
+          racepickerMatchupContainer.classList.remove("d-none");
+          racepickerMatchupSelects.map(select => select.setAttribute('name', 'race[]'));
+        } else {
+          racepickerMatchupContainer.classList.add("d-none");
+          racepickerMatchupSelects.map(select => select.removeAttribute('name'));
+        }
+      });
 
       var validator = new FormValidator('cpl-signup', [{
         name: 'account',
@@ -301,7 +347,7 @@
         rules: 'required'
       }, {
         name: 'mmr',
-        rules: 'required'
+        rules: 'required|integer|greater_than[0]|less_than[10000]'
       }], function(errors, event) {
         event.preventDefault();
 
