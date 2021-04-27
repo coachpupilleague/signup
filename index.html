@@ -37,10 +37,18 @@
       .checkmark {
         color: green;
       }
-      #header {
+      header {
         background-color: #061F48;
         color: #FFFFFF;
         text-align: center;
+      }
+      footer {
+        background-color: #272828;
+        color: #FFFFFF;
+        box-shadow: 0 50vh 0 50vh #272828;
+      }
+      footer .discord-text {
+        text-align: right;
       }
     </style>
 
@@ -48,9 +56,9 @@
   </head>
   <body>
 
-    <div id="header" class="py-2">
+    <header class="py-2">
       <h1>CPL7 Signup form</h1>
-    </div>
+    </header>
 
     <div class="container mt-2 mb-5">
 
@@ -296,6 +304,25 @@
         </div>
       </div>
     </div>
+
+    <footer class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+          </div>
+          <div class="col-lg-3 col-6">
+            <div>
+              <a href="https://discord.gg/6QEXQ8d" target="_blank">
+                <img src="Discord-Logo+Wordmark-White.png" class="img-fluid" alt="Coach Pupil League Logo">
+              </a>
+            </div>
+            <div class="discord-text">
+              Please join the <a href="https://discord.gg/6QEXQ8d" target="_blank">CPL Discord</a> for all required information
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script type="text/javascript" src="helper_functions.js"></script>
 
