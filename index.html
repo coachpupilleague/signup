@@ -72,14 +72,14 @@
 
             <div class="mb-3">Fields marked <span class="red">*</span> are required.</div>
 
-            <!-- Account name -->
+            <!-- Screen name -->
             <div class="form-group mb-4 required">
-              <label for="account">Account name</label>
+              <label for="account">Screen name</label>
               <div class="invalid-tooltip-container">
                 <input class="form-control" type="text" placeholder="e.g. lazersnipe" id="account" aria-describedby="account-help" name="account">
-                <div class="invalid-tooltip">Please provide an account name</div>
+                <div class="invalid-tooltip">Please provide a screen name</div>
               </div>
-              <small id="account-help" class="form-text text-muted">The StarCraft account name you will be using during CPL.</small>
+              <small id="account-help" class="form-text text-muted">This will be the name that CPL uses on all official posts and should match your discord name or nickname in the CPL server for ease of coordination</small>
             </div>
 
             <!-- Discord account -->
@@ -90,16 +90,6 @@
                 <div class="invalid-tooltip">Please provide a discord account in the format &lt;account&gt;#&lt;4 digit number&gt;</div>
               </div>
               <small id="discord-help" class="form-text text-muted">Your default discord account, consisting of your username and discriminator (a 4-digit number).</small>
-            </div>
-
-            <!-- CPL Discord account -->
-            <div class="form-group mb-4 required">
-              <label for="cpl-discord">CPL Discord account</label>
-              <div class="invalid-tooltip-container">
-                <input class="form-control" type="text" placeholder="e.g. Snipe" id="cpl-discord" aria-describedby="cpl-discord-help" name="cpl_discord">
-                <div class="invalid-tooltip">Please provide a discord account name</div>
-              </div>
-              <small id="cpl-discord-help" class="form-text text-muted"> This is the screen name you will be using on Discord. Please try to use a discord name that is the same or similar to your StarCraft account name to make things easier for everyone.</small>
             </div>
 
             <!-- Role(s) -->
@@ -137,19 +127,45 @@
                 <input class="form-control" type="text" placeholder="e.g. 1750" id="mmr" aria-describedby="mmr-help" name="mmr">
                 <div class="invalid-tooltip">Please provide MMR (only a number with 3 or 4 digits)</div>
               </div>
-              <small id="mmr-help" class="form-text text-muted"> Approximate MMR. If you haven't laddered on StarCraft Remastered before please make your best educated guess - or - enter 0000 and make a note about your estimated skill level/previous iccup rank in the additional info section. (Please note if you enter 0000 we may require replays or have you play some pre-preseason matches to help determine a baseline for what tier to place you in to best suit your skill level.</small>
+              <small id="mmr-help" class="form-text text-muted">Approximate MMR. If you haven't laddered on StarCraft Remastered before please make your best educated guess - or - enter 0000 and make a note about your estimated skill level/previous iccup rank in the additional info section. (Please note if you enter 0000 we may require replays or have you play some pre-preseason matches to help determine a baseline for what tier to place you in to best suit your skill level.</small>
             </div>
 
             <!-- Race -->
             <div class="form-group mb-4 required">
               <label for="race">Race</label>
-              <select class="form-control" id="race" aria-describedby="race-help" name="race[]">
-                <option value="Terran">Terran</option>
-                <option value="Protoss">Protoss</option>
-                <option value="Zerg">Zerg</option>
-                <option value="Racepicker">Racepicker</option>
-              </select>
-              <small id="race-help" class="form-text text-muted">Main Race/Match-ups if race picker (Random is not allowed, but you can play a different race week-to-week if you wish - please select race picker if you intend to play more than 1 race during the season.).</small>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="race[]" id="terran" value="Terran">
+                <label class="form-check-label" for="terran">
+                  Terran
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="race[]" id="protoss" value="Protoss">
+                <label class="form-check-label" for="protoss">
+                  Protoss
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="race[]" id="zerg" value="Zerg">
+                <label class="form-check-label" for="zerg">
+                  Zerg
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="race[]" id="declared_weekly" value="Declared weekly">
+                <label class="form-check-label" for="declared_weekly">
+                  Declared weekly
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="race[]" id="racepicker" value="Racepicker">
+                <label class="form-check-label" for="racepicker">
+                  Racepicker
+                </label>
+                <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                <div class="invalid-tooltip">Please select at least one</div>
+              </div>
+              <small id="race-help" class="form-text text-muted">Main Race/Match-ups if race picker (Random is not allowed, but you can play a different race week-to-week if you wish).</small>
             </div>
 
             <!-- Racepicker matchups -->
@@ -157,31 +173,76 @@
               <div class="col-md-4">
                 <div class="form-group mb-4 required">
                   <label for="vs-terran">vs. Terran</label>
-                  <select class="form-control js-racepicker-matchup-select" id="vs-terran">
-                    <option value="TvT">Terran (TvT)</option>
-                    <option value="PvT">Protoss (PvT)</option>
-                    <option value="ZvT">Zerg (ZvT)</option>
-                  </select>
+                  <div class="form-check">
+                    <input class="form-check-input js-racepicker-vs-terran" type="radio" id="tvt" value="TvT">
+                    <label class="form-check-label" for="tvt">
+                      Terran (TvT)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input js-racepicker-vs-terran" type="radio" id="pvt" value="PvT">
+                    <label class="form-check-label" for="pvt">
+                      Protoss (PvT)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input js-racepicker-vs-terran" type="radio" id="zvt" value="ZvT">
+                    <label class="form-check-label" for="zvt">
+                      Zerg (ZvT)
+                    </label>
+                    <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                    <div class="invalid-tooltip">Please select at least one</div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group mb-4 required">
                   <label for="vs-protoss">vs. Protoss</label>
-                  <select class="form-control js-racepicker-matchup-select" id="vs-protoss">
-                    <option value="TvP">Terran (TvP)</option>
-                    <option value="PvP">Protoss (PvP)</option>
-                    <option value="ZvP">Zerg (ZvP)</option>
-                  </select>
+                  <div class="form-check">
+                    <input class="form-check-input js-racepicker-vs-protoss" type="radio" id="tvp" value="TvP">
+                    <label class="form-check-label" for="tvp">
+                      Terran (TvP)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input js-racepicker-vs-protoss" type="radio" id="pvp" value="PvP">
+                    <label class="form-check-label" for="pvp">
+                      Protoss (PvP)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input js-racepicker-vs-protoss" type="radio" id="zvp" value="ZvP">
+                    <label class="form-check-label" for="zvp">
+                      Zerg (ZvP)
+                    </label>
+                    <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                    <div class="invalid-tooltip">Please select at least one</div>
+                  </div>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group mb-4 required">
                   <label for="vs-zerg">vs. Zerg</label>
-                  <select class="form-control js-racepicker-matchup-select" id="vs-zerg">
-                    <option value="TvZ">Terran (TvZ)</option>
-                    <option value="PvZ">Protoss (PvZ)</option>
-                    <option value="ZvZ">Zerg (ZvZ)</option>
-                  </select>
+                  <div class="form-check">
+                    <input class="form-check-input js-racepicker-vs-zerg" type="radio" id="tvz" value="TvZ">
+                    <label class="form-check-label" for="tvz">
+                      Terran (TvZ)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input js-racepicker-vs-zerg" type="radio" id="pvz" value="PvZ">
+                    <label class="form-check-label" for="pvz">
+                      Protoss (PvZ)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input js-racepicker-vs-zerg" type="radio" id="zvz" value="ZvZ">
+                    <label class="form-check-label" for="zvz">
+                      Zerg (ZvZ)
+                    </label>
+                    <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                    <div class="invalid-tooltip">Please select at least one</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -308,11 +369,68 @@
               <small class="form-text text-muted">Please select the times of day (in your own timezone) that you would be available to practice with your CPL team (more than one answer possible)</small>
             </div>
 
+            <!-- Activity -->
+            <div class="form-group mb-4 required">
+              <label for="race">Activity</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="activity[]" id="very_active" value="Very Active">
+                <label class="form-check-label" for="very_active">
+                  Very Active - I would like to play league matches more than 50% of the weeks of CPL
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="activity[]" id="active" value="Active">
+                <label class="form-check-label" for="active">
+                  Active - I would like to play league matches approximately 50% of the weeks
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="activity[]" id="less_active" value="Less active">
+                <label class="form-check-label" for="less_active">
+                  Less Active - I would only like to sign up to play a few times during the season
+                </label>
+                <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                <div class="invalid-tooltip">Please select at least one</div>
+              </div>
+              <small id="race-help" class="form-text text-muted">How active do you anticipate being during this season? If you are a coach, please answer this in regards to coaching.</small>
+            </div>
+
             <!-- Team Admin -->
             <div class="form-group mb-4">
-              <label for="team-admin">Team Admin</label>
-              <textarea class="form-control" rows="3" placeholder="e.g. I can help with handling the Administrating of the league!" id="team-admin" aria-describedby="team-admin-help" name="team-admin"></textarea>
-              <small id="team-admin-help" class="form-text text-muted">If you'd like to be a Team Admin for your team (help handling team line-ups, reporting your teams scores) , or if you have any interest in volunteering for any other Admin work/casting etc. let us know.</small>
+              <label>Would you like to help out with CPL this season?</label>
+              <div class="invalid-tooltip-container">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Team Admining" id="help1" name="help[]">
+                  <label class="form-check-label" for="help1">
+                    Team Admining
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Casting" id="help2" name="help[]">
+                  <label class="form-check-label" for="help2">
+                    Casting
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Liquipedia Updates" id="help3" name="help[]">
+                  <label class="form-check-label" for="help3">
+                    Liquipedia Updates
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Graphics" id="help3" name="help[]">
+                  <label class="form-check-label" for="help3">
+                    Graphics
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Other" id="help4" name="help[]">
+                  <label class="form-check-label" for="help4">
+                    Other (Specify in final textbox)
+                  </label>
+                </div>
+              </div>
+              <small class="form-text text-muted">If you'd like to be a Team Admin for your team (help handling team line-ups, reporting your teams scores), or if you have any interest in volunteering for any other Admin work/casting etc. let us know.</small>
             </div>
 
             <!-- Additional info -->
@@ -370,7 +488,9 @@
       const loadingSpinner = document.getElementById('loading-spinner');
       const submitButton = document.getElementById('submit-button');
       const racepickerMatchupContainer = document.getElementById('js-racepicker-matchup-container');
-      const racepickerMatchupSelects = Array.from(document.getElementsByClassName('js-racepicker-matchup-select'));
+      const racepickerRadioButtonsTerran = Array.from(document.getElementsByClassName('js-racepicker-vs-terran'));
+      const racepickerRadioButtonsProtoss = Array.from(document.getElementsByClassName('js-racepicker-vs-protoss'));
+      const racepickerRadioButtonsZerg = Array.from(document.getElementsByClassName('js-racepicker-vs-zerg'));
 
       var removeIsInvalidFromThis = function() {
         this.classList.remove("is-invalid");
@@ -385,14 +505,20 @@
         }
       }
 
-      form.race.addEventListener('change', (event) => {
-        if (event.target.value === 'Racepicker') {
-          racepickerMatchupContainer.classList.remove("d-none");
-          racepickerMatchupSelects.map(select => select.setAttribute('name', 'race[]'));
-        } else {
-          racepickerMatchupContainer.classList.add("d-none");
-          racepickerMatchupSelects.map(select => select.removeAttribute('name'));
-        }
+      document.getElementsByName('race[]').forEach((element) => {
+        element.addEventListener('change', (event) => {
+          if (event.target.value === 'Racepicker') {
+            racepickerMatchupContainer.classList.remove("d-none");
+            racepickerRadioButtonsTerran.map(radioButton => radioButton.setAttribute('name', 'racePickerTerran[]'));
+            racepickerRadioButtonsProtoss.map(radioButton => radioButton.setAttribute('name', 'racePickerProtoss[]'));
+            racepickerRadioButtonsZerg.map(radioButton => radioButton.setAttribute('name', 'racePickerZerg[]'));
+          } else {
+            racepickerMatchupContainer.classList.add("d-none");
+            racepickerRadioButtonsTerran.map(radioButton => radioButton.removeAttribute('name'));
+            racepickerRadioButtonsProtoss.map(radioButton => radioButton.removeAttribute('name'));
+            racepickerRadioButtonsZerg.map(radioButton => radioButton.removeAttribute('name'));
+          }
+        });
       });
 
       var validator = new FormValidator('cpl-signup', [{
@@ -402,17 +528,32 @@
         name: 'discord',
         rules: 'required|callback_validateDiscord'
       }, {
-        name: 'cpl_discord',
+        name: 'roles[]',
         rules: 'required'
       }, {
-        name: 'roles[]',
+        name: 'mmr',
+        rules: 'required|integer|greater_than[0]|less_than[10000]'
+      }, {
+        name: 'race[]',
+        rules: 'required'
+      }, {
+        name: 'racePickerTerran[]',
+        rules: 'required'
+      }, {
+        name: 'racePickerProtoss[]',
+        rules: 'required'
+      }, {
+        name: 'racePickerZerg[]',
+        rules: 'required'
+      }, {
+        name: 'timezone',
         rules: 'required'
       }, {
         name: 'availability[]',
         rules: 'required'
       }, {
-        name: 'mmr',
-        rules: 'required|integer|greater_than[0]|less_than[10000]'
+        name: 'activity[]',
+        rules: 'required'
       }], function(errors, event) {
         event.preventDefault();
 
