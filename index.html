@@ -499,7 +499,9 @@
       
       var removeIsInvalidFromAllNearInputs = function() {
         var allNearInputs = this.closest('.form-group').querySelectorAll('input');
-        for (el of allNearInputs) {
+
+        for (let i=0; i < allNearInputs.length; i++) {
+          let el = allNearInputs[i];
           el.classList.remove("is-invalid");
           el.removeEventListener('focus', removeIsInvalidFromAllNearInputs);
         }
@@ -556,12 +558,13 @@
         rules: 'required'
       }], function(errors, event) {
         event.preventDefault();
-
+ 
         if (errors.length > 0) {
-          for (error of errors) {
-            var element = error.element;
+          for (let i=0; i < errors.length; i++) {
+            var element = errors[i].element;
             if (Symbol.iterator in Object(element)) {
-              for (el of element) {
+              for (let i=0; i < element.length; i++) {
+                let el = element[i];
                 el.classList.add("is-invalid");
                 el.addEventListener('focus', removeIsInvalidFromAllNearInputs);
               }
@@ -570,13 +573,22 @@
               element.addEventListener('focus', removeIsInvalidFromThis);
             }
           }
+
+          // scroll to first erroneous element to show user that there are errors
+          var firstErrorElement = errors[0].element;
+          if (Symbol.iterator in Object(firstErrorElement)) {
+            firstErrorElement[0].scrollIntoView({behavior: 'smooth', block: "center"});
+          } else {
+            firstErrorElement.scrollIntoView({behavior: 'smooth', block: "center"});
+          }
         } else {
           
           submitButton.style.display = 'none';
           loadingSpinner.style.display = 'block';
 
           var formData = new FormData(form);
-          for (entry of formData.entries()) {
+          for (let i=0; i < formData.entries().length; i++) {
+            let entry = formData.entries()[i];
             var key = entry[0];
             var value = entry[1];
             formData.set(key, sanitize(value));
