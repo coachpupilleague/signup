@@ -8,14 +8,11 @@
 
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
     <link rel="stylesheet" href="loadingspinner.css">
 
     <style>
-      .invalid-tooltip-container {
-        position: relative;
-      }
       .invalid-tooltip {
         left: 0;
       }
@@ -75,7 +72,7 @@
             <!-- Screen name -->
             <div class="form-group mb-4 required">
               <label for="account">Screen name</label>
-              <div class="invalid-tooltip-container">
+              <div class="position-relative">
                 <input class="form-control" type="text" placeholder="e.g. lazersnipe" id="account" aria-describedby="account-help" name="account">
                 <div class="invalid-tooltip">Please provide a screen name</div>
               </div>
@@ -85,7 +82,7 @@
             <!-- Discord account -->
             <div class="form-group mb-4 required">
               <label for="discord">Discord account</label>
-              <div class="invalid-tooltip-container">
+              <div class="position-relative">
                 <input class="form-control" type="text" placeholder="e.g. ~Medi~#1708" id="discord" aria-describedby="discord-help" name="discord">
                 <div class="invalid-tooltip">Please provide a discord account in the format &lt;account&gt;#&lt;4 digit number&gt;</div>
               </div>
@@ -95,7 +92,7 @@
             <!-- Role(s) -->
             <div class="form-group mb-4 required">
               <label>Role(s)</label>
-              <div class="invalid-tooltip-container">
+              <div class="position-relative">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="Player" id="player" name="roles[]">
                   <label class="form-check-label" for="player">
@@ -123,7 +120,7 @@
             <!-- MMR -->
             <div class="form-group mb-4 required">
               <label for="mmr">MMR</label>
-              <div class="invalid-tooltip-container">
+              <div class="position-relative">
                 <input class="form-control" type="text" placeholder="e.g. 1750" id="mmr" aria-describedby="mmr-help" name="mmr">
                 <div class="invalid-tooltip">Please provide MMR (only a number with 3 or 4 digits)</div>
               </div>
@@ -133,37 +130,39 @@
             <!-- Race -->
             <div class="form-group mb-4 required">
               <label for="race">Race</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="race[]" id="terran" value="Terran">
-                <label class="form-check-label" for="terran">
-                  Terran
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="race[]" id="protoss" value="Protoss">
-                <label class="form-check-label" for="protoss">
-                  Protoss
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="race[]" id="zerg" value="Zerg">
-                <label class="form-check-label" for="zerg">
-                  Zerg
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="race[]" id="declared_weekly" value="Declared weekly">
-                <label class="form-check-label" for="declared_weekly">
-                  Declared weekly
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="race[]" id="racepicker" value="Racepicker">
-                <label class="form-check-label" for="racepicker">
-                  Racepicker
-                </label>
-                <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
-                <div class="invalid-tooltip">Please select at least one</div>
+              <div class="position-relative">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="race[]" id="terran" value="Terran">
+                  <label class="form-check-label" for="terran">
+                    Terran
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="race[]" id="protoss" value="Protoss">
+                  <label class="form-check-label" for="protoss">
+                    Protoss
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="race[]" id="zerg" value="Zerg">
+                  <label class="form-check-label" for="zerg">
+                    Zerg
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="race[]" id="declared_weekly" value="Declared weekly">
+                  <label class="form-check-label" for="declared_weekly">
+                    Declared weekly
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="race[]" id="racepicker" value="Racepicker">
+                  <label class="form-check-label" for="racepicker">
+                    Racepicker
+                  </label>
+                  <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                  <div class="invalid-tooltip">Please select at least one</div>
+                </div>
               </div>
               <small id="race-help" class="form-text text-muted">Main Race/Match-ups if race picker (Random is not allowed, but you can play a different race week-to-week if you wish).</small>
             </div>
@@ -173,75 +172,81 @@
               <div class="col-md-4">
                 <div class="form-group mb-4 required">
                   <label for="vs-terran">vs. Terran</label>
-                  <div class="form-check">
-                    <input class="form-check-input js-racepicker-vs-terran" type="radio" id="tvt" value="TvT">
-                    <label class="form-check-label" for="tvt">
-                      Terran (TvT)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input js-racepicker-vs-terran" type="radio" id="pvt" value="PvT">
-                    <label class="form-check-label" for="pvt">
-                      Protoss (PvT)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input js-racepicker-vs-terran" type="radio" id="zvt" value="ZvT">
-                    <label class="form-check-label" for="zvt">
-                      Zerg (ZvT)
-                    </label>
-                    <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
-                    <div class="invalid-tooltip">Please select at least one</div>
+                  <div class="position-relative">
+                    <div class="form-check">
+                      <input class="form-check-input js-racepicker-vs-terran" type="radio" id="tvt" value="TvT">
+                      <label class="form-check-label" for="tvt">
+                        Terran (TvT)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input js-racepicker-vs-terran" type="radio" id="pvt" value="PvT">
+                      <label class="form-check-label" for="pvt">
+                        Protoss (PvT)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input js-racepicker-vs-terran" type="radio" id="zvt" value="ZvT">
+                      <label class="form-check-label" for="zvt">
+                        Zerg (ZvT)
+                      </label>
+                      <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                      <div class="invalid-tooltip">Please select at least one</div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group mb-4 required">
                   <label for="vs-protoss">vs. Protoss</label>
-                  <div class="form-check">
-                    <input class="form-check-input js-racepicker-vs-protoss" type="radio" id="tvp" value="TvP">
-                    <label class="form-check-label" for="tvp">
-                      Terran (TvP)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input js-racepicker-vs-protoss" type="radio" id="pvp" value="PvP">
-                    <label class="form-check-label" for="pvp">
-                      Protoss (PvP)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input js-racepicker-vs-protoss" type="radio" id="zvp" value="ZvP">
-                    <label class="form-check-label" for="zvp">
-                      Zerg (ZvP)
-                    </label>
-                    <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
-                    <div class="invalid-tooltip">Please select at least one</div>
+                  <div class="position-relative">
+                    <div class="form-check">
+                      <input class="form-check-input js-racepicker-vs-protoss" type="radio" id="tvp" value="TvP">
+                      <label class="form-check-label" for="tvp">
+                        Terran (TvP)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input js-racepicker-vs-protoss" type="radio" id="pvp" value="PvP">
+                      <label class="form-check-label" for="pvp">
+                        Protoss (PvP)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input js-racepicker-vs-protoss" type="radio" id="zvp" value="ZvP">
+                      <label class="form-check-label" for="zvp">
+                        Zerg (ZvP)
+                      </label>
+                      <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                      <div class="invalid-tooltip">Please select at least one</div>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group mb-4 required">
                   <label for="vs-zerg">vs. Zerg</label>
-                  <div class="form-check">
-                    <input class="form-check-input js-racepicker-vs-zerg" type="radio" id="tvz" value="TvZ">
-                    <label class="form-check-label" for="tvz">
-                      Terran (TvZ)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input js-racepicker-vs-zerg" type="radio" id="pvz" value="PvZ">
-                    <label class="form-check-label" for="pvz">
-                      Protoss (PvZ)
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input js-racepicker-vs-zerg" type="radio" id="zvz" value="ZvZ">
-                    <label class="form-check-label" for="zvz">
-                      Zerg (ZvZ)
-                    </label>
-                    <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
-                    <div class="invalid-tooltip">Please select at least one</div>
+                  <div class="position-relative">
+                    <div class="form-check">
+                      <input class="form-check-input js-racepicker-vs-zerg" type="radio" id="tvz" value="TvZ">
+                      <label class="form-check-label" for="tvz">
+                        Terran (TvZ)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input js-racepicker-vs-zerg" type="radio" id="pvz" value="PvZ">
+                      <label class="form-check-label" for="pvz">
+                        Protoss (PvZ)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input js-racepicker-vs-zerg" type="radio" id="zvz" value="ZvZ">
+                      <label class="form-check-label" for="zvz">
+                        Zerg (ZvZ)
+                      </label>
+                      <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                      <div class="invalid-tooltip">Please select at least one</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -250,95 +255,98 @@
             <!-- Timezone -->
             <div class="form-group mb-4 required">
               <label for="timezone">Timezone</label>
-              <select class="form-control" id="timezone" aria-describedby="timezone-help" name="timezone">
-                <option value="(GMT-12:00)">(GMT-12:00) International Date Line West</option>
-                <option value="(GMT-11:00)">(GMT-11:00) Midway Island, Samoa</option>
-                <option value="(GMT-10:00)">(GMT-10:00) Hawaii</option>
-                <option value="(GMT-09:00)">(GMT-09:00) Alaska</option>
-                <option value="(GMT-08:00)">(GMT-08:00) Pacific Time (US & Canada)</option>
-                <option value="(GMT-08:00)">(GMT-08:00) Tijuana, Baja California</option>
-                <option value="(GMT-07:00)">(GMT-07:00) Arizona</option>
-                <option value="(GMT-07:00)">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
-                <option value="(GMT-07:00)">(GMT-07:00) Mountain Time (US & Canada)</option>
-                <option value="(GMT-06:00)">(GMT-06:00) Central America</option>
-                <option value="(GMT-06:00)">(GMT-06:00) Central Time (US & Canada)</option>
-                <option value="(GMT-05:00)">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
-                <option value="(GMT-05:00)" selected>(GMT-05:00) Eastern Time (US & Canada)</option>
-                <option value="(GMT-05:00)">(GMT-05:00) Indiana (East)</option>
-                <option value="(GMT-04:00)">(GMT-04:00) Atlantic Time (Canada)</option>
-                <option value="(GMT-04:00)">(GMT-04:00) Caracas, La Paz</option>
-                <option value="(GMT-04:00)">(GMT-04:00) Manaus</option>
-                <option value="(GMT-04:00)">(GMT-04:00) Santiago</option>
-                <option value="(GMT-03:30)">(GMT-03:30) Newfoundland</option>
-                <option value="(GMT-03:00)">(GMT-03:00) Brasilia</option>
-                <option value="(GMT-03:00)">(GMT-03:00) Buenos Aires, Georgetown</option>
-                <option value="(GMT-03:00)">(GMT-03:00) Greenland</option>
-                <option value="(GMT-03:00)">(GMT-03:00) Montevideo</option>
-                <option value="(GMT-02:00)">(GMT-02:00) Mid-Atlantic</option>
-                <option value="(GMT-01:00)">(GMT-01:00) Cape Verde Is.</option>
-                <option value="(GMT-01:00)">(GMT-01:00) Azores</option>
-                <option value="(GMT+00:00)">(GMT+00:00) Casablanca, Monrovia, Reykjavik</option>
-                <option value="(GMT+00:00)">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
-                <option value="(GMT+01:00)">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
-                <option value="(GMT+01:00)">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
-                <option value="(GMT+01:00)">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
-                <option value="(GMT+01:00)">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
-                <option value="(GMT+01:00)">(GMT+01:00) West Central Africa</option>
-                <option value="(GMT+02:00)">(GMT+02:00) Amman</option>
-                <option value="(GMT+02:00)">(GMT+02:00) Athens, Bucharest, Istanbul</option>
-                <option value="(GMT+02:00)">(GMT+02:00) Beirut</option>
-                <option value="(GMT+02:00)">(GMT+02:00) Cairo</option>
-                <option value="(GMT+02:00)">(GMT+02:00) Harare, Pretoria</option>
-                <option value="(GMT+02:00)">(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
-                <option value="(GMT+02:00)">(GMT+02:00) Jerusalem</option>
-                <option value="(GMT+02:00)">(GMT+02:00) Minsk</option>
-                <option value="(GMT+02:00)">(GMT+02:00) Windhoek</option>
-                <option value="(GMT+03:00)">(GMT+03:00) Kuwait, Riyadh, Baghdad</option>
-                <option value="(GMT+03:00)">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
-                <option value="(GMT+03:00)">(GMT+03:00) Nairobi</option>
-                <option value="(GMT+03:00)">(GMT+03:00) Tbilisi</option>
-                <option value="(GMT+03:30)">(GMT+03:30) Tehran</option>
-                <option value="(GMT+04:00)">(GMT+04:00) Abu Dhabi, Muscat</option>
-                <option value="(GMT+04:00)">(GMT+04:00) Baku</option>
-                <option value="(GMT+04:00)">(GMT+04:00) Yerevan</option>
-                <option value="(GMT+04:30)">(GMT+04:30) Kabul</option>
-                <option value="(GMT+05:00)">(GMT+05:00) Yekaterinburg</option>
-                <option value="(GMT+05:00)">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
-                <option value="(GMT+05:30)">(GMT+05:30) Sri Jayawardenapura</option>
-                <option value="(GMT+05:30)">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
-                <option value="(GMT+05:45)">(GMT+05:45) Kathmandu</option>
-                <option value="(GMT+06:00)">(GMT+06:00) Almaty, Novosibirsk</option>
-                <option value="(GMT+06:00)">(GMT+06:00) Astana, Dhaka</option>
-                <option value="(GMT+06:30)">(GMT+06:30) Yangon (Rangoon)</option>
-                <option value="(GMT+07:00)">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
-                <option value="(GMT+07:00)">(GMT+07:00) Krasnoyarsk</option>
-                <option value="(GMT+08:00)">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
-                <option value="(GMT+08:00)">(GMT+08:00) Kuala Lumpur, Singapore</option>
-                <option value="(GMT+08:00)">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
-                <option value="(GMT+08:00)">(GMT+08:00) Perth</option>
-                <option value="(GMT+08:00)">(GMT+08:00) Taipei</option>
-                <option value="(GMT+09:00)">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
-                <option value="(GMT+09:00)">(GMT+09:00) Seoul</option>
-                <option value="(GMT+09:00)">(GMT+09:00) Yakutsk</option>
-                <option value="(GMT+09:30)">(GMT+09:30) Adelaide</option>
-                <option value="(GMT+09:30)">(GMT+09:30) Darwin</option>
-                <option value="(GMT+10:00)">(GMT+10:00) Brisbane</option>
-                <option value="(GMT+10:00)">(GMT+10:00) Canberra, Melbourne, Sydney</option>
-                <option value="(GMT+10:00)">(GMT+10:00) Hobart</option>
-                <option value="(GMT+10:00)">(GMT+10:00) Guam, Port Moresby</option>
-                <option value="(GMT+10:00)">(GMT+10:00) Vladivostok</option>
-                <option value="(GMT+11:00)">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
-                <option value="(GMT+12:00)">(GMT+12:00) Auckland, Wellington</option>
-                <option value="(GMT+12:00)">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
-                <option value="(GMT+13:00)">(GMT+13:00) Nuku'alofa</option>
-              </select>
+              <div class="position-relative">
+                <select class="form-control" id="timezone" aria-describedby="timezone-help" name="timezone">
+                  <option value="(GMT-12:00)">(GMT-12:00) International Date Line West</option>
+                  <option value="(GMT-11:00)">(GMT-11:00) Midway Island, Samoa</option>
+                  <option value="(GMT-10:00)">(GMT-10:00) Hawaii</option>
+                  <option value="(GMT-09:00)">(GMT-09:00) Alaska</option>
+                  <option value="(GMT-08:00)">(GMT-08:00) Pacific Time (US & Canada)</option>
+                  <option value="(GMT-08:00)">(GMT-08:00) Tijuana, Baja California</option>
+                  <option value="(GMT-07:00)">(GMT-07:00) Arizona</option>
+                  <option value="(GMT-07:00)">(GMT-07:00) Chihuahua, La Paz, Mazatlan</option>
+                  <option value="(GMT-07:00)">(GMT-07:00) Mountain Time (US & Canada)</option>
+                  <option value="(GMT-06:00)">(GMT-06:00) Central America</option>
+                  <option value="(GMT-06:00)">(GMT-06:00) Central Time (US & Canada)</option>
+                  <option value="(GMT-05:00)">(GMT-05:00) Bogota, Lima, Quito, Rio Branco</option>
+                  <option value="(GMT-05:00)" selected>(GMT-05:00) Eastern Time (US & Canada)</option>
+                  <option value="(GMT-05:00)">(GMT-05:00) Indiana (East)</option>
+                  <option value="(GMT-04:00)">(GMT-04:00) Atlantic Time (Canada)</option>
+                  <option value="(GMT-04:00)">(GMT-04:00) Caracas, La Paz</option>
+                  <option value="(GMT-04:00)">(GMT-04:00) Manaus</option>
+                  <option value="(GMT-04:00)">(GMT-04:00) Santiago</option>
+                  <option value="(GMT-03:30)">(GMT-03:30) Newfoundland</option>
+                  <option value="(GMT-03:00)">(GMT-03:00) Brasilia</option>
+                  <option value="(GMT-03:00)">(GMT-03:00) Buenos Aires, Georgetown</option>
+                  <option value="(GMT-03:00)">(GMT-03:00) Greenland</option>
+                  <option value="(GMT-03:00)">(GMT-03:00) Montevideo</option>
+                  <option value="(GMT-02:00)">(GMT-02:00) Mid-Atlantic</option>
+                  <option value="(GMT-01:00)">(GMT-01:00) Cape Verde Is.</option>
+                  <option value="(GMT-01:00)">(GMT-01:00) Azores</option>
+                  <option value="(GMT+00:00)">(GMT+00:00) Casablanca, Monrovia, Reykjavik</option>
+                  <option value="(GMT+00:00)">(GMT+00:00) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
+                  <option value="(GMT+01:00)">(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+                  <option value="(GMT+01:00)">(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague</option>
+                  <option value="(GMT+01:00)">(GMT+01:00) Brussels, Copenhagen, Madrid, Paris</option>
+                  <option value="(GMT+01:00)">(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+                  <option value="(GMT+01:00)">(GMT+01:00) West Central Africa</option>
+                  <option value="(GMT+02:00)">(GMT+02:00) Amman</option>
+                  <option value="(GMT+02:00)">(GMT+02:00) Athens, Bucharest, Istanbul</option>
+                  <option value="(GMT+02:00)">(GMT+02:00) Beirut</option>
+                  <option value="(GMT+02:00)">(GMT+02:00) Cairo</option>
+                  <option value="(GMT+02:00)">(GMT+02:00) Harare, Pretoria</option>
+                  <option value="(GMT+02:00)">(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
+                  <option value="(GMT+02:00)">(GMT+02:00) Jerusalem</option>
+                  <option value="(GMT+02:00)">(GMT+02:00) Minsk</option>
+                  <option value="(GMT+02:00)">(GMT+02:00) Windhoek</option>
+                  <option value="(GMT+03:00)">(GMT+03:00) Kuwait, Riyadh, Baghdad</option>
+                  <option value="(GMT+03:00)">(GMT+03:00) Moscow, St. Petersburg, Volgograd</option>
+                  <option value="(GMT+03:00)">(GMT+03:00) Nairobi</option>
+                  <option value="(GMT+03:00)">(GMT+03:00) Tbilisi</option>
+                  <option value="(GMT+03:30)">(GMT+03:30) Tehran</option>
+                  <option value="(GMT+04:00)">(GMT+04:00) Abu Dhabi, Muscat</option>
+                  <option value="(GMT+04:00)">(GMT+04:00) Baku</option>
+                  <option value="(GMT+04:00)">(GMT+04:00) Yerevan</option>
+                  <option value="(GMT+04:30)">(GMT+04:30) Kabul</option>
+                  <option value="(GMT+05:00)">(GMT+05:00) Yekaterinburg</option>
+                  <option value="(GMT+05:00)">(GMT+05:00) Islamabad, Karachi, Tashkent</option>
+                  <option value="(GMT+05:30)">(GMT+05:30) Sri Jayawardenapura</option>
+                  <option value="(GMT+05:30)">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
+                  <option value="(GMT+05:45)">(GMT+05:45) Kathmandu</option>
+                  <option value="(GMT+06:00)">(GMT+06:00) Almaty, Novosibirsk</option>
+                  <option value="(GMT+06:00)">(GMT+06:00) Astana, Dhaka</option>
+                  <option value="(GMT+06:30)">(GMT+06:30) Yangon (Rangoon)</option>
+                  <option value="(GMT+07:00)">(GMT+07:00) Bangkok, Hanoi, Jakarta</option>
+                  <option value="(GMT+07:00)">(GMT+07:00) Krasnoyarsk</option>
+                  <option value="(GMT+08:00)">(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
+                  <option value="(GMT+08:00)">(GMT+08:00) Kuala Lumpur, Singapore</option>
+                  <option value="(GMT+08:00)">(GMT+08:00) Irkutsk, Ulaan Bataar</option>
+                  <option value="(GMT+08:00)">(GMT+08:00) Perth</option>
+                  <option value="(GMT+08:00)">(GMT+08:00) Taipei</option>
+                  <option value="(GMT+09:00)">(GMT+09:00) Osaka, Sapporo, Tokyo</option>
+                  <option value="(GMT+09:00)">(GMT+09:00) Seoul</option>
+                  <option value="(GMT+09:00)">(GMT+09:00) Yakutsk</option>
+                  <option value="(GMT+09:30)">(GMT+09:30) Adelaide</option>
+                  <option value="(GMT+09:30)">(GMT+09:30) Darwin</option>
+                  <option value="(GMT+10:00)">(GMT+10:00) Brisbane</option>
+                  <option value="(GMT+10:00)">(GMT+10:00) Canberra, Melbourne, Sydney</option>
+                  <option value="(GMT+10:00)">(GMT+10:00) Hobart</option>
+                  <option value="(GMT+10:00)">(GMT+10:00) Guam, Port Moresby</option>
+                  <option value="(GMT+10:00)">(GMT+10:00) Vladivostok</option>
+                  <option value="(GMT+11:00)">(GMT+11:00) Magadan, Solomon Is., New Caledonia</option>
+                  <option value="(GMT+12:00)">(GMT+12:00) Auckland, Wellington</option>
+                  <option value="(GMT+12:00)">(GMT+12:00) Fiji, Kamchatka, Marshall Is.</option>
+                  <option value="(GMT+13:00)">(GMT+13:00) Nuku'alofa</option>
+                </select>
+                <div class="invalid-tooltip">Please select timezone</div>
+              </div>
               <small id="timezone-help" class="form-text text-muted">What is your timezone (This will greatly help us when creating teams to try our best to help get players in similar timezone to play with).</small>
             </div>
 
             <!-- Availability -->
             <div class="form-group mb-4 required">
               <label>Availability</label>
-              <div class="invalid-tooltip-container">
+              <div class="position-relative">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="Morning" id="availability1" name="availability[]">
                   <label class="form-check-label" for="availability1">
@@ -372,25 +380,27 @@
             <!-- Activity -->
             <div class="form-group mb-4 required">
               <label for="race">Activity</label>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="activity[]" id="very_active" value="Very Active">
-                <label class="form-check-label" for="very_active">
-                  Very Active - I would like to play league matches more than 50% of the weeks of CPL
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="activity[]" id="active" value="Active">
-                <label class="form-check-label" for="active">
-                  Active - I would like to play league matches approximately 50% of the weeks
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="activity[]" id="less_active" value="Less active">
-                <label class="form-check-label" for="less_active">
-                  Less Active - I would only like to sign up to play a few times during the season
-                </label>
-                <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
-                <div class="invalid-tooltip">Please select at least one</div>
+              <div class="position-relative">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="activity[]" id="very_active" value="Very Active">
+                  <label class="form-check-label" for="very_active">
+                    Very Active - I would like to play league matches more than 50% of the weeks of CPL
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="activity[]" id="active" value="Active">
+                  <label class="form-check-label" for="active">
+                    Active - I would like to play league matches approximately 50% of the weeks
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="activity[]" id="less_active" value="Less active">
+                  <label class="form-check-label" for="less_active">
+                    Less Active - I would only like to sign up to play a few times during the season
+                  </label>
+                  <!-- the position of this tooltip is not optimal, because it actually concerns all checkboxes above -->
+                  <div class="invalid-tooltip">Please select at least one</div>
+                </div>
               </div>
               <small id="race-help" class="form-text text-muted">How active do you anticipate being during this season? If you are a coach, please answer this in regards to coaching.</small>
             </div>
@@ -398,37 +408,35 @@
             <!-- Team Admin -->
             <div class="form-group mb-4">
               <label>Would you like to help out with CPL this season?</label>
-              <div class="invalid-tooltip-container">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Team Admining" id="help1" name="help[]">
-                  <label class="form-check-label" for="help1">
-                    Team Admining
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Casting" id="help2" name="help[]">
-                  <label class="form-check-label" for="help2">
-                    Casting
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Liquipedia Updates" id="help3" name="help[]">
-                  <label class="form-check-label" for="help3">
-                    Liquipedia Updates
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Graphics" id="help4" name="help[]">
-                  <label class="form-check-label" for="help4">
-                    Graphics
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="Other" id="help5" name="help[]">
-                  <label class="form-check-label" for="help5">
-                    Other (Specify in final textbox)
-                  </label>
-                </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Team Admining" id="help1" name="help[]">
+                <label class="form-check-label" for="help1">
+                  Team Admining
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Casting" id="help2" name="help[]">
+                <label class="form-check-label" for="help2">
+                  Casting
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Liquipedia Updates" id="help3" name="help[]">
+                <label class="form-check-label" for="help3">
+                  Liquipedia Updates
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Graphics" id="help4" name="help[]">
+                <label class="form-check-label" for="help4">
+                  Graphics
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Other" id="help5" name="help[]">
+                <label class="form-check-label" for="help5">
+                  Other (Specify in final textbox)
+                </label>
               </div>
               <small class="form-text text-muted">Team admins are responsible for helping organize team lineups and practices.</small>
             </div>
@@ -477,6 +485,8 @@
     </footer>
 
     <script type="text/javascript" src="helper_functions.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
     <!-- based on https://github.com/rickharrison/validate.js -->
     <!-- fixing PR: https://github.com/beijaflor/validate.js -->
