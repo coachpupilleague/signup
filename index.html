@@ -34,6 +34,32 @@
       .checkmark {
         color: green;
       }
+      .info-icon {
+        padding: 0 8px;
+        border: 1px solid #000000;
+        border-radius: 15px;
+        font-weight: bold;
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .popover {
+        background: #000000;
+      }
+      .popover-body {
+        color: #FFFFFF;
+      }
+      .popover[data-popper-placement="top"]>.popover-arrow:after {
+        border-top-color: #000000;
+      }
+      .popover[data-popper-placement="right"]>.popover-arrow:after {
+        border-right-color: #000000;
+      }
+      .popover[data-popper-placement="bottom"]>.popover-arrow:after {
+        border-bottom-color: #000000;
+      }
+      .popover[data-popper-placement="left"]>.popover-arrow:after {
+        border-left-color: #000000;
+      }            
       header {
         background-color: #061F48;
         color: #FFFFFF;
@@ -46,6 +72,11 @@
       }
       footer .discord-text {
         text-align: right;
+      }
+      @media (min-width: 768px) {
+        .popover {
+          max-width: 30%;
+        }
       }
     </style>
 
@@ -69,29 +100,39 @@
 
             <div class="mb-3">Fields marked <span class="red">*</span> are required.</div>
 
+            <div class="mb-3">Hover over the <span class="info-icon">?</span> icons for further explanations</div>
+
             <!-- Screen name -->
             <div class="form-group mb-4 required">
               <label for="account">Screen name</label>
+              <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-content="This will be the name that CPL uses on all official posts and should match your discord name or nickname in the CPL server for ease of coordination">
+                <span class="info-icon">?</span>
+              </span>
               <div class="position-relative">
                 <input class="form-control" type="text" placeholder="e.g. lazersnipe" id="account" aria-describedby="account-help" name="account">
                 <div class="invalid-tooltip">Please provide a screen name</div>
               </div>
-              <small id="account-help" class="form-text text-muted">This will be the name that CPL uses on all official posts and should match your discord name or nickname in the CPL server for ease of coordination</small>
             </div>
 
             <!-- Discord account -->
             <div class="form-group mb-4 required">
               <label for="discord">Discord account</label>
+              <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-content="Your default discord account, consisting of your username and discriminator (a 4-digit number)">
+                <span class="info-icon">?</span>
+              </span>
               <div class="position-relative">
                 <input class="form-control" type="text" placeholder="e.g. ~Medi~#1708" id="discord" aria-describedby="discord-help" name="discord">
                 <div class="invalid-tooltip">Please provide a discord account in the format &lt;account&gt;#&lt;4 digit number&gt;</div>
               </div>
-              <small id="discord-help" class="form-text text-muted">Your default discord account, consisting of your username and discriminator (a 4-digit number).</small>
+              <small id="discord-help" class="form-text text-muted"></small>
             </div>
 
             <!-- Role(s) -->
             <div class="form-group mb-4 required">
               <label>Role(s)</label>
+              <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-content="Coach/Assistant Coach/Player (You can sign-up for BOTH an Assistant Coach and Player if you meet the requirements, but you'll need to qualify for Tier 0 to be an Assistant Coach)">
+                <span class="info-icon">?</span>
+              </span>
               <div class="position-relative">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="Player" id="player" name="roles[]">
@@ -114,22 +155,26 @@
                   <div class="invalid-tooltip">Please check at least one</div>
                 </div>
               </div>
-              <small class="form-text text-muted">Coach/Assistant Coach/Player (You can sign-up for BOTH an Assistant Coach and Player if you meet the requirements, but you'll need to qualify for Tier 0 to be an Assistant Coach).</small>
             </div>
 
             <!-- MMR -->
             <div class="form-group mb-4 required">
               <label for="mmr">MMR</label>
+              <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-content="Approximate MMR. If you haven't laddered on StarCraft Remastered before please make your best educated guess - or - enter 0000 and make a note about your estimated skill level/previous iccup rank in the additional info section. (Please note if you enter 0000 we may require replays or have you play some pre-preseason matches to help determine a baseline for what tier to place you in to best suit your skill level">
+                <span class="info-icon">?</span>
+              </span>
               <div class="position-relative">
                 <input class="form-control" type="text" placeholder="e.g. 1750" id="mmr" aria-describedby="mmr-help" name="mmr">
                 <div class="invalid-tooltip">Please provide MMR (only a number with 3 or 4 digits)</div>
               </div>
-              <small id="mmr-help" class="form-text text-muted">Approximate MMR. If you haven't laddered on StarCraft Remastered before please make your best educated guess - or - enter 0000 and make a note about your estimated skill level/previous iccup rank in the additional info section. (Please note if you enter 0000 we may require replays or have you play some pre-preseason matches to help determine a baseline for what tier to place you in to best suit your skill level.</small>
             </div>
 
             <!-- Race -->
             <div class="form-group mb-4 required">
               <label for="race">Race</label>
+              <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-content="Main Race/Match-ups if race picker (Random is not allowed, but you can play a different race week-to-week if you wish)">
+                <span class="info-icon">?</span>
+              </span>
               <div class="position-relative">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="race[]" id="terran" value="Terran">
@@ -164,7 +209,6 @@
                   <div class="invalid-tooltip">Please select at least one</div>
                 </div>
               </div>
-              <small id="race-help" class="form-text text-muted">Main Race/Match-ups if race picker (Random is not allowed, but you can play a different race week-to-week if you wish).</small>
             </div>
 
             <!-- Racepicker matchups -->
@@ -255,6 +299,9 @@
             <!-- Timezone -->
             <div class="form-group mb-4 required">
               <label for="timezone">Timezone</label>
+              <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-content="What is your timezone (This will greatly help us when creating teams to try our best to help get players in similar timezone to play with)">
+                <span class="info-icon">?</span>
+              </span>
               <div class="position-relative">
                 <select class="form-control" id="timezone" aria-describedby="timezone-help" name="timezone">
                   <option value="(GMT-12:00)">(GMT-12:00) International Date Line West</option>
@@ -340,12 +387,14 @@
                 </select>
                 <div class="invalid-tooltip">Please select timezone</div>
               </div>
-              <small id="timezone-help" class="form-text text-muted">What is your timezone (This will greatly help us when creating teams to try our best to help get players in similar timezone to play with).</small>
             </div>
 
             <!-- Availability -->
             <div class="form-group mb-4 required">
               <label>Availability</label>
+              <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-content="Please select the times of day (in your own timezone) that you would be available to practice with your CPL team (more than one answer possible)">
+                <span class="info-icon">?</span>
+              </span>
               <div class="position-relative">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="Morning" id="availability1" name="availability[]">
@@ -374,12 +423,14 @@
                   <div class="invalid-tooltip">Please check at least one</div>
                 </div>
               </div>
-              <small class="form-text text-muted">Please select the times of day (in your own timezone) that you would be available to practice with your CPL team (more than one answer possible)</small>
             </div>
 
             <!-- Activity -->
             <div class="form-group mb-4 required">
               <label for="race">Activity</label>
+              <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-content="How active do you anticipate being during this season? If you are a coach, please answer this in regards to coaching.">
+                <span class="info-icon">?</span>
+              </span>
               <div class="position-relative">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="activity[]" id="very_active" value="Very Active">
@@ -402,12 +453,14 @@
                   <div class="invalid-tooltip">Please select at least one</div>
                 </div>
               </div>
-              <small id="race-help" class="form-text text-muted">How active do you anticipate being during this season? If you are a coach, please answer this in regards to coaching.</small>
             </div>
 
             <!-- Team Admin -->
             <div class="form-group mb-4">
               <label>Would you like to help out with CPL this season?</label>
+              <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-content="Team admins are responsible for helping organize team lineups and practices.">
+                <span class="info-icon">?</span>
+              </span>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="Team Admining" id="help1" name="help[]">
                 <label class="form-check-label" for="help1">
@@ -438,14 +491,15 @@
                   Other (Specify in final textbox)
                 </label>
               </div>
-              <small class="form-text text-muted">Team admins are responsible for helping organize team lineups and practices.</small>
             </div>
 
             <!-- Additional info -->
             <div class="form-group mb-4">
               <label for="additional-info">Anything else we should know?</label>
+              <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-content="Please note that there will be a separate form sent around at the end of preseason where you can request players and coaches you would like to work with.">
+                <span class="info-icon">?</span>
+              </span>
               <textarea class="form-control" rows="3" placeholder="e.g. It doesn't matter what team I'm on, I want to help people improve!" id="additional-info" aria-describedby="additional-info-help" name="additional-info"></textarea>
-              <small id="additional-info-help" class="form-text text-muted">Please note that there will be a separate form sent around at the end of preseason where you can request players and coaches you would like to work with.</small>
             </div>
             
             <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
@@ -501,6 +555,14 @@
       const racepickerRadioButtonsTerran = Array.from(document.getElementsByClassName('js-racepicker-vs-terran'));
       const racepickerRadioButtonsProtoss = Array.from(document.getElementsByClassName('js-racepicker-vs-protoss'));
       const racepickerRadioButtonsZerg = Array.from(document.getElementsByClassName('js-racepicker-vs-zerg'));
+
+      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl, {
+          'placement': 'right',
+          'trigger': 'hover focus'
+        })
+      })
 
       var removeIsInvalidFromThis = function() {
         this.classList.remove("is-invalid");
