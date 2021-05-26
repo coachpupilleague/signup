@@ -538,8 +538,6 @@
       </div>
     </footer>
 
-    <script type="text/javascript" src="helper_functions.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
     <!-- based on https://github.com/rickharrison/validate.js -->
@@ -563,6 +561,11 @@
           'trigger': 'hover focus'
         })
       })
+
+      var callback_validateDiscord = function(value) {
+        // validating discord names with regex
+        return /^[^#@\:]*#\d{4}$/.test(value);
+      }
 
       var removeIsInvalidFromThis = function() {
         this.classList.remove("is-invalid");
@@ -657,14 +660,6 @@
           
           submitButton.style.display = 'none';
           loadingSpinner.style.display = 'block';
-
-          var formData = new FormData(form);
-          for (let i=0; i < formData.entries().length; i++) {
-            let entry = formData.entries()[i];
-            var key = entry[0];
-            var value = entry[1];
-            formData.set(key, sanitize(value));
-          }
 
           fetch(form.action, { method: 'POST', body: new FormData(form) })
             .then(response => response.json())
