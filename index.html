@@ -28,6 +28,14 @@
         margin-top: 50px;
         font-size: 30px;
       }
+      #failed-submit {
+        display: none;
+        margin-top: 20px;
+      }
+      .fail-icon {
+        margin-right: 10px;
+        font-size: 50px;
+      }
       #loading-spinner {
         display: none;
       }
@@ -515,6 +523,17 @@
             Form submitted successfully.
           </div>
 
+          <div id="failed-submit">
+            <div class="alert alert-danger d-flex" role="alert">
+              <div class="fail-icon align-self-center">&cross;</div>
+              <div class="flex-grow-1">
+                There was an error and the form could not be submitted.<br>
+                There's a known issue with certain browser extensions blocking the cross-origin request.<br>
+                We are working on fixing this. If you want to sign up immediately, please do this through the TL thread.
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -547,6 +566,7 @@
     <script>
       const form = document.forms['cpl-signup'];
       const successfulSubmit = document.getElementById('successful-submit');
+      const failedSubmit = document.getElementById('failed-submit');
       const loadingSpinner = document.getElementById('loading-spinner');
       const submitButton = document.getElementById('submit-button');
       const racepickerMatchupContainer = document.getElementById('js-racepicker-matchup-container');
@@ -664,7 +684,11 @@
           fetch(form.action, { method: 'POST', body: new FormData(form) })
             .then(response => response.json())
             .then(response => { form.style.display = 'none'; successfulSubmit.style.display = 'block'; })
-            .catch(error => console.error('Error!', error.message))
+            .catch(error => {
+              console.error('Error!', error.message);
+              loadingSpinner.style.display = 'none';
+              failedSubmit.style.display = 'block';
+            });
         }
       }).registerCallback('validateDiscord', callback_validateDiscord);
 
