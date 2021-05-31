@@ -686,6 +686,7 @@
             .then(response => { form.style.display = 'none'; successfulSubmit.style.display = 'block'; })
             .catch(error => {
               console.error('Error!', error.message);
+              submitButton.style.display = 'block';
               loadingSpinner.style.display = 'none';
               failedSubmit.style.display = 'block';
             });
