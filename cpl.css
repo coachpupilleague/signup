@@ -1,0 +1,73 @@
+.invalid-tooltip {
+  left: 0;
+}
+.form-group.required > label:after { 
+  content:"*";
+  color: #F00;
+}
+.red { 
+  color: #F00;
+}
+#successful-submit {
+  display: none;
+  margin-top: 50px;
+  font-size: 30px;
+}
+#failed-submit {
+  display: none;
+  margin-top: 20px;
+}
+.fail-icon {
+  margin-right: 10px;
+  font-size: 50px;
+}
+#loading-spinner {
+  display: none;
+}
+.checkmark {
+  color: green;
+}
+.info-icon {
+  padding: 0 8px;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+}
+.popover {
+  background: #000000;
+}
+.popover-body {
+  color: #FFFFFF;
+}
+.popover[data-popper-placement="top"]>.popover-arrow:after {
+  border-top-color: #000000;
+}
+.popover[data-popper-placement="right"]>.popover-arrow:after {
+  border-right-color: #000000;
+}
+.popover[data-popper-placement="bottom"]>.popover-arrow:after {
+  border-bottom-color: #000000;
+}
+.popover[data-popper-placement="left"]>.popover-arrow:after {
+  border-left-color: #000000;
+}            
+header {
+  background-color: #061F48;
+  color: #FFFFFF;
+  text-align: center;
+}
+footer {
+  background-color: #272828;
+  color: #FFFFFF;
+  box-shadow: 0 50vh 0 50vh #272828;
+}
+footer .discord-text {
+  text-align: right;
+}
+@media (min-width: 768px) {
+  .popover {
+    max-width: 30%;
+  }
+}

@@ -9,40 +9,43 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="loadingspinner.css">
-
-    <style>
-      header {
-        background-color: #061F48;
-        color: #FFFFFF;
-        text-align: center;
-      }
-      footer {
-        background-color: #272828;
-        color: #FFFFFF;
-        box-shadow: 0 50vh 0 50vh #272828;
-      }
-      footer .discord-text {
-        text-align: right;
-      }
-    </style>
+    <link rel="stylesheet" href="../loadingspinner.css">
+    <link rel="stylesheet" href="../cpl.css">
 
     <title>CPL7 Signup</title>
   </head>
   <body>
 
     <header class="py-2">
-      <h1>CPL7 Signup playerlist</h1>
+      <h1>CPL7 Signup player list</h1>
     </header>
 
     <div class="container mt-2 mb-5">
 
       <div class="row">
         <div class="col-md-3 text-center">
-          <img src="cpllogo.png" class="img-fluid" alt="Coach Pupil League Logo">
+          <img src="../cpllogo.png" class="img-fluid" alt="Coach Pupil League Logo">
         </div>
         <div class="col-md-9">
-          test
+
+          <div id="loading-spinner" style="display: block;">
+            <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          </div>
+
+          <div id="failed-submit">
+            <div class="alert alert-danger d-flex" role="alert">
+              <div class="fail-icon align-self-center">&cross;</div>
+              <div class="flex-grow-1">
+                There was an error and the player list could not be retrieved.<br>
+                There's a known issue with certain browser extensions blocking the cross-origin request.<br>
+                We are working on fixing this.
+              </div>
+            </div>
+          </div>
+
+          <div id="player-list-container">
+          </div>
+
         </div>
       </div>
     </div>
@@ -55,7 +58,7 @@
           <div class="col-lg-3 col-6">
             <div>
               <a href="https://discord.gg/6QEXQ8d" target="_blank">
-                <img src="Discord-Logo+Wordmark-White.png" class="img-fluid" alt="Coach Pupil League Logo">
+                <img src="../Discord-Logo+Wordmark-White.png" class="img-fluid" alt="Discord Logo">
               </a>
             </div>
             <div class="discord-text">
@@ -69,6 +72,44 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
     <script>
+      const loadingSpinner = document.getElementById('loading-spinner');
+      const playerListContainer = document.getElementById('player-list-container');
+      const url = 'https://script.google.com/macros/s/AKfycbxzbEKNhUELuvA-NzV24dN_Aibv4nuWjl6ti22EzdV8RqQCPQX1Z0uTSg0ETL7mKzzQ/exec';
+      const failedSubmit = document.getElementById('failed-submit');
+
+      let createPlayerList = function(playerListData) {
+        playerListData.sort();
+
+        let tableElement = document.createElement('table');
+        tableElement.className = 'table table-striped';
+
+        let tableBodyElement = document.createElement('tbody');
+
+        for (let i=0; i < playerListData.length; i++) {
+          let tableRowElement = document.createElement('tr');
+          let tableDataElement = document.createElement('td');
+          tableDataElement.innerHTML = playerListData[i];
+          tableRowElement.appendChild(tableDataElement);
+          tableBodyElement.appendChild(tableRowElement);
+        }
+
+        tableElement.appendChild(tableBodyElement);
+        playerListContainer.appendChild(tableElement);
+
+        return true;
+      }
+
+      fetch(url, { method: 'GET' })
+        .then(response => response.json())
+        .then(response => {
+          loadingSpinner.style.display = 'none';
+          createPlayerList(response.playerList);
+        })
+        .catch(error => {
+          console.error('Error!', error.message);
+          loadingSpinner.style.display = 'none';
+          failedSubmit.style.display = 'block';
+        });
 
     </script>
 
