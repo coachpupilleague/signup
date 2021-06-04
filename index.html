@@ -621,6 +621,7 @@
         } else {
           
           submitButton.style.display = 'none';
+          failedSubmit.style.display = 'none';
           loadingSpinner.style.display = 'block';
 
           fetch(form.action, { method: 'POST', body: prepareFormData(new FormData(form)) })

@@ -78,7 +78,11 @@
       const failedSubmit = document.getElementById('failed-submit');
 
       let createPlayerList = function(playerListData) {
-        playerListData.sort();
+        playerListData.sort(function(a, b) {
+          if(a.toLowerCase() < b.toLowerCase()) { return -1; }
+          if(a.toLowerCase() > b.toLowerCase()) { return 1; }
+          return 0;
+        });
 
         let tableElement = document.createElement('table');
         tableElement.className = 'table table-striped';
