@@ -495,6 +495,8 @@
     <!-- fixing PR: https://github.com/beijaflor/validate.js -->
     <script type="text/javascript" src="validate.js"></script>
 
+    <script type="text/javascript" src="prepare_form_data.js"></script>
+
     <script>
       const form = document.forms['cpl-signup'];
       const successfulSubmit = document.getElementById('successful-submit');
@@ -621,7 +623,7 @@
           submitButton.style.display = 'none';
           loadingSpinner.style.display = 'block';
 
-          fetch(form.action, { method: 'POST', body: new FormData(form) })
+          fetch(form.action, { method: 'POST', body: prepareFormData(new FormData(form)) })
             .then(response => response.json())
             .then(response => {
               if (response.result === 'error') {
