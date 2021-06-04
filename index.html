@@ -451,9 +451,14 @@
             <div class="alert alert-danger d-flex" role="alert">
               <div class="fail-icon align-self-center">&cross;</div>
               <div class="flex-grow-1">
-                There was an error and the form could not be submitted.<br>
-                There's a known issue with certain browser extensions blocking the cross-origin request.<br>
-                We are working on fixing this. If you want to sign up immediately, please do this through the TL thread.
+                <p>
+                  There was an error and the form could not be submitted.<br>
+                  There's a known issue with certain browser extensions blocking the cross-origin request.<br>
+                  We are working on fixing this. If you want to sign up immediately, please do this through the TL thread.
+                </p>
+                <p id="error-container">
+                  
+                </p>
               </div>
             </div>
           </div>
@@ -494,6 +499,7 @@
       const form = document.forms['cpl-signup'];
       const successfulSubmit = document.getElementById('successful-submit');
       const failedSubmit = document.getElementById('failed-submit');
+      const errorContainer = document.getElementById('error-container');
       const loadingSpinner = document.getElementById('loading-spinner');
       const submitButton = document.getElementById('submit-button');
       const racepickerMatchupContainer = document.getElementById('js-racepicker-matchup-container');
@@ -517,6 +523,13 @@
       var removeIsInvalidFromThis = function() {
         this.classList.remove("is-invalid");
         this.removeEventListener('focus', removeIsInvalidFromThis);
+      }
+
+      var handleError = function(error) {
+        submitButton.style.display = 'block';
+        loadingSpinner.style.display = 'none';
+        errorContainer.innerHTML = 'ERROR: ' + error;
+        failedSubmit.style.display = 'block';
       }
       
       var removeIsInvalidFromAllNearInputs = function() {
@@ -610,13 +623,15 @@
 
           fetch(form.action, { method: 'POST', body: new FormData(form) })
             .then(response => response.json())
-            .then(response => { form.style.display = 'none'; successfulSubmit.style.display = 'block'; })
-            .catch(error => {
-              console.error('Error!', error.message);
-              submitButton.style.display = 'block';
-              loadingSpinner.style.display = 'none';
-              failedSubmit.style.display = 'block';
-            });
+            .then(response => {
+              if (response.result === 'error') {
+                handleError(response.error);
+              } else {
+                form.style.display = 'none';
+                successfulSubmit.style.display = 'block';
+              }
+            })
+            .catch(error => { handleError(error.message); });
         }
       }).registerCallback('validateDiscord', callback_validateDiscord);
 
