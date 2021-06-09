@@ -627,12 +627,12 @@
           fetch(form.action, { method: 'POST', body: prepareFormData(new FormData(form)) })
             .then(response => response.json())
             .then(response => {
-              if (response.result === 'error') {
-                handleError(response.error);
-              } else {
+              // if (response.result === 'error') {
+              //   handleError(response.error);
+              // } else {
                 form.style.display = 'none';
                 successfulSubmit.style.display = 'block';
-              }
+              // }
             })
             .catch(error => { handleError(error.message); });
         }
